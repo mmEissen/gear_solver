@@ -2,7 +2,7 @@ import pygame as pg
 import numpy as np
 
 from systems import RenderSystem, MechanicsSolver
-from mechanical_parts import Motor, GearWheel
+from mechanical_parts import Motor, GearWheel, GearMotor
 
 SCREEN_SIZE = (1400, 900)
 
@@ -21,10 +21,11 @@ def main():
     render_system = RenderSystem(screen)
     mechanical_solver = MechanicsSolver()
     wheel = Motor(0.001, 100, np.array([200, 200]))
-    gear = GearWheel(25, np.array([400, 200]))
+    gear = GearMotor(0.001, 25, np.array([400, 200]))
     render_system.register(wheel)
     render_system.register(gear)
     mechanical_solver.register(wheel)
+    mechanical_solver.register(gear)
     main_loop(screen, [render_system, mechanical_solver])
 
 if __name__ == '__main__':

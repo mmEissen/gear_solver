@@ -117,6 +117,17 @@ class GearWheel(Part):
         pass
 
 
+class GearMotor(GearWheel):
+
+    def __init__(self, speed, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.speed = speed
+
+    def solve_constraints(self):
+        rotation = pg.time.get_ticks() * self.speed
+        self.set('rotation', rotation)
+
+
 class Motor(Wheel):
 
     def __init__(self, speed, *args, **kwargs):
