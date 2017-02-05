@@ -39,7 +39,7 @@ class RenderSystem(object):
                 transformed_polygon = [np.squeeze(np.asarray(v * matrix.transpose()))
                                        for v in polygon]
                 points = [point[:-1] for point in transformed_polygon]
-                draw.polygon(self.surface, color, points)
+                draw.aalines(self.surface, color, True, points)
 
 
 class MechanicsSolver(object):
@@ -54,4 +54,4 @@ class MechanicsSolver(object):
         for root_part in self.root_parts:
             root_part.reset()
         for root_part in self.root_parts:
-            root_part.solve_constraints()
+            root_part.solve_constraints_recursive()
